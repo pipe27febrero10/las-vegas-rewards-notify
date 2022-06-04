@@ -1,6 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as puppeteer from 'puppeteer';
+import { Credential } from './dtos/credential.dto';
+import { ICredentialsRepository } from './interfaces/credentials-repository.interface';
 
 @Injectable()
 export class CredentialsService {
@@ -9,7 +11,7 @@ export class CredentialsService {
     private facebookOauthEndpoint = '';
     private urlGamePage = '';
 
-    constructor(private readonly configService : ConfigService){
+    constructor(private readonly configService : ConfigService, @Inject('ICredentialsRepository') private readonly credentialRepository : ICredentialsRepository){
       this.username = this.configService.get('USER_FACEBOOK');
       this.password = this.configService.get('PASS_FACEBOOK');
       this.facebookOauthEndpoint = this.configService.get('FACEBOOK_OAUTH_ENDPOINT');
@@ -46,5 +48,15 @@ export class CredentialsService {
       {
         throw new Error('Error getting access token');
       }
+    }
+
+    async createAccessToken(accessToken: string) : Promise<Credential> {
+      return this.credentialRepository.saveCredential({
+        accessToken
+      })
+    }
+
+    async getLastAccessToken() : Promise<string> {
+      return this.credentialRepository.getLastCredential()?.accessToken || '';
     }
 }
