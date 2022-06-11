@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Reward, RewardDTO } from './dtos/rewards.dto';
+import { Reward, RewardDTO } from './dtos/reward.dto';
 import { IRewardsRepository } from './interfaces/rewards-repository.interface';
 import { DateTime } from 'luxon';
 import { v4 as uuidv4 } from 'uuid';

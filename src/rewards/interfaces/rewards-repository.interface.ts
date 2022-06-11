@@ -1,4 +1,4 @@
-import { Reward, RewardDTO } from "../dtos/rewards.dto"
+import { Reward, RewardDTO } from "../dtos/reward.dto"
 
 export interface IRewardsRepository{
     getRewards(): Reward[]
