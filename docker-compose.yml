@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  las_vegas_reward_notify:
+    container_name: las_vegas_reward_notify
+    build:
+      context: .
+    restart: always
+    env_file: 
+      - ./.env
+    ports:
+      - '${PORT}:${PORT}'
