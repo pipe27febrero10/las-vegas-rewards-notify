@@ -1,5 +1,6 @@
 # environment variables
 .env
+.wwebjs_auth
 # compiled output
 /dist
 /node_modules
