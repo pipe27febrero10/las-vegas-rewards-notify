@@ -9,10 +9,7 @@ export class CredentialsRepositoryInMemory implements ICredentialsRepository {
     private credentials: Credential[] = [];
     constructor() { }
     getLastCredential(): Credential {
-        const sortedCredentials = this.credentials.sort((a, b) => {
-            return DateTime.fromISO(a.createdAt).diff(DateTime.fromISO(b.createdAt)).milliseconds;
-        });
-        return sortedCredentials[0] || null;
+        return this.credentials.length > 0 ? this.credentials[this.credentials.length - 1] : null;
     }
 
     saveCredential(credentialDTO: CredentialDTO): Credential {
